@@ -1,0 +1,52 @@
+Interplay Uninstaller Version 1.0 (Oct 17 1998)
+Copyright (C) 1997 Interplay Productions
+
+Installation Report
+Please do not modify this file.
+
+Program: FALLOUT 2: A POST NUCLEAR ROLE PLAYING GAME
+Installed: 04/01/17 at 19:02:44.
+
+-- Log Begin --
+Copied Z:\Fallout Alternative\readme.txt
+Copied Z:\Fallout Alternative\fallout2.exe
+MadeDir Z:\Fallout Alternative\ereg
+Copied Z:\Fallout Alternative\ereg\ereg.bin
+Copied Z:\Fallout Alternative\ereg\ereg3201.dll
+Copied Z:\Fallout Alternative\ereg\eregui.ini
+Copied Z:\Fallout Alternative\ereg\eregui32.dll
+Copied Z:\Fallout Alternative\ereg\inter.bmp
+Copied Z:\Fallout Alternative\ereg\prtbody.txt
+Copied Z:\Fallout Alternative\ereg\regfax.txt
+Copied Z:\Fallout Alternative\ereg\regmail.txt
+Copied Z:\Fallout Alternative\ereg\regrcrd.txt
+Copied Z:\Fallout Alternative\ereg\reg32a.exe
+Copied Z:\Fallout Alternative\ereg\regxmit.txt
+MadeDir Z:\Fallout Alternative\data
+MadeDir Z:\Fallout Alternative\data\maps
+MadeDir Z:\Fallout Alternative\data\sound
+MadeDir Z:\Fallout Alternative\data\sound\music
+Copied Z:\Fallout Alternative\data\sound\music\01hub.acm
+Copied Z:\Fallout Alternative\data\sound\music\03wrldmp.acm
+Copied Z:\Fallout Alternative\data\sound\music\05raider.acm
+Copied Z:\Fallout Alternative\data\sound\music\07desert.acm
+Copied Z:\Fallout Alternative\data\sound\music\08vats.acm
+Copied Z:\Fallout Alternative\data\sound\music\10labone.acm
+Copied Z:\Fallout Alternative\data\sound\music\12junktn.acm
+Copied Z:\Fallout Alternative\data\sound\music\13carvrn.acm
+Copied Z:\Fallout Alternative\data\sound\music\14necro.acm
+Copied Z:\Fallout Alternative\data\sound\music\16follow.acm
+Copied Z:\Fallout Alternative\data\sound\music\17arroyo.acm
+Copied Z:\Fallout Alternative\data\sound\music\18modoc.acm
+Copied Z:\Fallout Alternative\data\sound\music\19reno.acm
+Copied Z:\Fallout Alternative\data\sound\music\20car.acm
+Copied Z:\Fallout Alternative\data\sound\music\21sf.acm
+Copied Z:\Fallout Alternative\data\sound\music\22vcity.acm
+Copied Z:\Fallout Alternative\data\sound\music\23world.acm
+Copied Z:\Fallout Alternative\data\sound\music\24redd.acm
+Copied Z:\Fallout Alternative\data\sound\music\wind1.acm
+Copied Z:\Fallout Alternative\data\sound\music\wind2.acm
+Copied Z:\Fallout Alternative\data\sound\music\akiss.acm
+Copied Z:\Fallout Alternative\critter.dat
+Copied Z:\Fallout Alternative\master.dat
+-- Log End--

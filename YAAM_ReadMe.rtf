@@ -1,0 +1,324 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fnil\fcharset2 Symbol;}}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\qc\b\f0\fs20 Readme File and Release Notes for YAAM v1.1a by Haenlomal\b0\par
+\pard\par
+\ul\b Table of Contents\ulnone\b0\par
+\par
+1. FAQ and Version History\par
+\tab 1.1 Frequently Asked Questions\par
+\tab 1.2 Version History\par
+\tab 1.3 Special Notes for YAAM v1.1a\par
+2. Summary & Design Philosophy\par
+\tab 2.1 Summary\par
+\tab 2.2 Design Philosophy\par
+3. Installation\par
+\tab 3.1 Technical Requirements\par
+\tab 3.2 Files Manifest\par
+\tab 3.3 Installation\par
+\tab 3.4 Manual Installation\par
+\tab 3.5 Uninstallation\par
+4. Technical Details\par
+\tab 4.1 New Damage Formula\par
+\tab 4.2 New Ammunition Attributes\par
+\tab 4.3 New Damage Figures\par
+\tab 4.4 Changes made to the engine\par
+5. Acknowledgements and Credits\par
+\par
+\par
+\ul\b 1. FAQ and Version History\ulnone\b0\par
+\par
+\ul\i 1.1 Frequently Asked Questions\ulnone\i0\par
+\par
+\b Q:\b0  What is YAAM, and where can I find it?\par
+\b A:\b0  YAAM stands for \b Y\b0 et \b A\b0 nother \b A\b0 mmo \b M\b0 od, and it is an ammo mod for Fallout 2. The latest version of YAAM is always available at the No Mutants Allowed website (http://www.nma-fallout.com/).\par
+\par
+\b Q:\b0  \b (Updated)\b0  Does it work with any other Fallout 2 mods out there?\par
+\b A:\b0  Yes! Thanks to Timeslip, YAAM is now fully integrated with sfall. This means that any mod that uses sfall should be able to use YAAM, at least in theory. As for other mods, \b\i as long as they do not touch any weapon protos, armor protos, ammo protos, or the Fallout 2 executable\b0\i0 , they should be fine, again at least in theory. The installer batch program that comes with sfall is smart enough to modify ddraw.ini to activate YAAM, while not touching other settings which the user and/or other mods may have enabled/disabled. Note: sfall is not part of the YAAM archive. If you plan to use YAAM with sfall, please download and install sfall \b prior\b0  to installing YAAM.\par
+\par
+\b Q:\b0  \b (Updated)\b0  I have a French/German installation of Fallout 2. Will this mod still work?\par
+\b A:\b0  Good question. From what I understand, the US version of the Fallout 2 executable should work with French or German installation, and the changes I had made have nothing to do with display settings or localization options. The only thing that is really missing is the localized version of PROTO.MSG file. As of Version 1.1a of YAAM, a localized version of PROTO.MSG in English, French, and German has been provided, and the installer is smart enough to install the proper localized version as necessary. \b\i It will even preserve customized changes from other mods that touch the PROTO.MSG file in almost all cases.\b0\i0  See the manual installation instructions for more details.\par
+\par
+\b Q:\b0  I have the Macintosh version of Fallout 2. Will this mod work for me?\par
+\b A:\b0  There are no plans at this time to support the Macintosh version of Fallout 2. In fact, there are no plans at this time to support any version other than the Windows version. Sorry.\par
+\par
+\b Q:\b0  So...another ammo mod for Fallout 2, eh? Aren't there a few of those out there already?\par
+\b A:\b0  Yes.\par
+\par
+\b Q:\b0  So what makes YAAM better?\par
+\b A:\b0  Nothing. I never claimed that this was better, just...different.\par
+\par
+\b Q:\b0  Fine. What makes YAAM different?\par
+\b A:\b0  YAAM changes the functionality of the DR ammo modifier to a DT ammo modifier. JHP and most normal ammo is given a 0 DT modifier, while AP and FMJ ammo are given a value of anywhere between 2 to 20, with the majority being around the 2-5 range. For balancing issues, changes were also made to the Dmg mod of most ammunition. The readme file contains a complete list of ammunition changes.\par
+\par
+\b Q:\b0  Wait a minute. The DT modifier is a positive number? Doesn't that \i add\i0  to the armor DT, thus decreasing damage?\par
+\b A:\b0  Yes, the DT modifier is positive. However, DT modifier is a negative modifier. I have changed the engine to \i subtract\i0  the DT modifier value during damage calculation, so it should decrease damage.\par
+\par
+\b Q:\b0  So where does that leave the DR ammo modifier?\par
+\b A:\b0  The DR ammo modifier is no longer an absolute value, but depends on the DT damage resisted. If, as a result of applying the DT ammo modifier the overall DT is reduced to below zero, then DT is set to zero, while DR is dropped by 10% for every DT point below zero. For example, suppose the ammunition has a DT ammo modifier value of 5, and the armor had a DT of 3 and a DR of 50. Then the net result would be an overall DT of 0, and an overall DR of 30, assuming no other factors are impacting DT or DR.\par
+\par
+\b Q:\b0  How about adjusting values for weapons and armor?\par
+\b A:\b0  Changes were not made to weapons and armor. Only ammunition (and of course the engine).\par
+\par
+\b Q:\b0  Why not? Don't you need to do that to get better balance?\par
+\b A:\b0  Perhaps. YAAM was, until quite recently, part of a much larger and much more ambitious combat mod that completely re-vamps tactical combat in Fallout 2. I have decided to split this small part off once I realized that it could stand alone.\par
+\par
+\b Q:\b0  Really? Will we ever get to see the combat mod?\par
+\b A:\b0  Perhaps. But I wouldn't hold your breath if I were you.\par
+\par
+\b Q:\b0  Fine, so what's the bottom line effect of all your changes?\par
+\b A:\b0  Generally speaking, ranged weapons now do more damage, regardless of the ammo you are using. JHP ammo will really hurt you if you are unarmored or poorly armored, but will barely faze you if you are well armored. AP ammo will not hurt you as much if you are unarmored, but you are guaranteed to still feel its effects even if you are in strong armor.\par
+\par
+\b Q:\b0  Anything else?\par
+\b A:\b0  Yes. Flamethrowers can hurt quite a bit now. And rocket launchers are pretty much insta-death if you are poorly armored. Those security bots are no longer a pushover, but a genuine can of "whoop-ass" that the original Fallout 2 developers envisioned them to be.\par
+\par
+\b Q:\b0  Ok, I'll bite. How do I install this thing?\par
+\b A:\b0  Create a new folder in your main Fallout 2 installation directory, and unzip everything there. Run the batch file YAAM_install.bat. Everything should be set. For more advanced users, there are also instructions for a manual install in the readme file.\par
+\par
+\b Q:\b0  What if I run into problems running your mod?\par
+\b A:\b0  Send me a PM or a post on the New Mutants Allowed website, and I'll respond as soon as I can.\par
+\par
+\ul\i 1.2 Version History\ulnone\i0\par
+\par
+\ul 1.1a\ulnone\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 Integrated YAAM with Timeslip's sfall -- Modified exe no longer needed if sfall is previously installed.\par
+{\pntext\f1\'B7\tab}Made changes that should provide greater integration with other mods, at least in theory.\par
+{\pntext\f1\'B7\tab}Included all ammo proto files in YAAM installation (while YAAM leaves some ammo protos unmodified, it is possible that other mods have made some of their own modifications.)\par
+{\pntext\f1\'B7\tab}Added modified version of PROTO.MSG file for French and German versions of Fallout 2.\par
+{\pntext\f1\'B7\tab}Corrected minor errors in Readme file.\par
+\pard\par
+\ul 1.0a\ulnone\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 Initial Implementation.\par
+\pard\par
+\ul\i 1.3 Special Notes for YAAM v1.1a\ulnone\i0\par
+\par
+Please note that the backup files made the YAAM_install.bat file has changed from a .BAK extension to a .YBK extension. This has no impact if you manually installed the mod. But if you used the YAAM_install.bat batch file to install YAAM v1.0a, either manually rename any backup files to have the .YBK extension, or else run the old YAAM_uninstall.bat, and then reinstall YAAM using the new and updated YAAM_install.bat file. Either way, saved games in progress will not be affected.\par
+\par
+\par
+\ul\b 2. Summary & Design Philosophy\ulnone\b0\par
+\par
+\ul\i 2.1 Summary (Or "What does this new-fangled mod do")\ulnone\i0\par
+\par
+YAAM stands for \b Y\b0 et \b A\b0 nother \b A\b0 mmo \b M\b0 od, and it is a modification for Interplay's Fallout 2 game. The primary purpose of this mod is to correct the imbalance between armor-piercing (AP) ammunition and other ammunition. However, as a result, several different forms of attack received a boost as well, intentionally or otherwise.\par
+\par
+The following is a summary of expected changes as a result of this modification:\par
+\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 The single most noticeable change is the existence of a "DT mod" in place of the "DR mod" as an ammo modifier. As the name implies, the DT mod works as a negative modifier against the target armor's DT.\par
+{\pntext\f1\'B7\tab}DR mod is no longer a hardcoded value, but is calculated based on the value of the DT mod and the target armor's DT rating. See Section 4 for the technical details, but suffice it to say that DR mod increases in value as the value of DT mod increase and as the value of the target armor's DT decrease.\par
+{\pntext\f1\'B7\tab}JHP ammo still does more damage against soft targets, but AP ammo will inflict more punishment on hard targets. Previously, JHP ammo did more damage than AP ammo regardless of the target's armor.\par
+{\pntext\f1\'B7\tab}JHP ammo does more or less the same damage against soft targets, while having much less effect against hard targets. By contrast, AP ammo does more general damage overall, though still inferior to JHP ammo with respect to soft targets. (Mathematically speaking, this is forced by making the average damage dealt by JHP ammo is slightly higher than their AP counterparts, but making the standard deviation of the damage considerably lower for AP ammo.)\par
+{\pntext\f1\'B7\tab}Rocket APs still inflict more or less the same damage, but Explosive Rockets had their damage potential greatly increased against soft targets. However, in exchange Explosive Rockets do much less damage against hard targets. In other words, if you get hit by an Explosive Rocket from a rocket launcher, and you don't have adequate protection, expect to suffer a quick and horrible death. Previously, Rocket APs are clearly superior regardless of the target's armor.\par
+{\pntext\f1\'B7\tab}In the same vein, rockets in general do much more damage, against soft targets. Soft armor offers little to no protection since the bonuses from the rockets pretty much negate almost all resistance.\par
+{\pntext\f1\'B7\tab}Flamethrower Fuel is now much more effective against hard targets. However, Flamethrower Fuel MK II is still the superior option.\par
+{\pntext\f1\'B7\tab}Performance of 9mm Ball and 9mm ammo has been tweaked to make them comparable to 10mm JHP and 10mm AP ammo respectively. For example, if a weapon firing 9mm Ball and a weapon firing 10mm JHP inflict the exact same raw damage against the same target, expect the final damage result to be generally the same as well. (Practically speaking, though, 10mm firing weapons should deal out more damage on average since they are generally stronger than their 9mm caliber counterparts.)\par
+{\pntext\f1\'B7\tab}The damage profile of the 14mm AP ammo has been overhauled. It now causes almost double its original damage against soft targets, maintains around the same damage against medium targets (metal and combat armor types) and has sufficient power to punch through and hurt hard targets. Think about it -- the caliber is \b 14mm AP\b0 ! This is close to anti-vehicle territory in real life, so upping the damage to something more realistic (i.e. packing more punch than the 10mm pistol), while still maintaining balance, was relatively high on this mod's to-do list.\par
+\pard\par
+\ul\i 2.2 Design Philosophy (Or "Why I did things I did")\ulnone\i0\par
+\par
+(This section may be safely skipped for those uninterested in the "whys" of the matter -- installation instruction follows in Section 3.)\par
+\par
+YAAM was designed from the ground up as a very simple mod. This meant that changes were kept to as minimal as possible. What follows is a short discussion behind the philosophy and physics behind this mod. Familiarity with the basic damage calculation formula is assumed -- it is covered rather nicely in the Fallout 2 Game Manual. Read up on it if needed, otherwise the following discussion will make little, if any, sense.\par
+\par
+Even though damage calculation is relatively simple in Fallout 2, in practice it is made more interesting by ammunition modifiers - something that wasn't really well documented in the Fallout 2 manual. In Fallout 2, ammunition has 3 modifiers: an AC (Armor Class) modifier, a Dmg (Damage) modifier, and a DR (Damage Resistance) modifier. The AC modifier modifies the chances for scoring a hit on the target, and is outside the scope of this mod. The Dmg modifier is a fraction which is multiplied against any raw damages computed from a weapon. For example, a Dmg modifier of "2/1" doubles initial damage coming out from the gun (ouch). Finally, the DR modifier is a positive or negative number representing percentage. For example, a DR modifier of "-25" means -25%. This percentage is stacked on top of the armor's DR, thus making it stronger or weaker depending on whether or not it is positive or negative.\par
+\par
+The key is interpreting each modifier to real-life physics. In armor, this is relatively straight forward. The Damage Threshold (DT) represents the amount of energy from the projectile that is effectively nullified - it may not be completely nullified, but at least some of it would be stopped cold. The DR represents any remaining energy from the projectile that is dispersed as it tunnels through the armor material to get to the flesh below.\par
+\par
+For ammunition, the Dmg modifier represents the tendency of the projectile to yaw, fragment, and induce hydrostatic shock \b once it has impacted the target and broken through the surface material of the armor.\b0  The higher the tendency, the higher this number should be. In a similar manner, the DR modifier impacts the projectile's ability to tunnel through the armor material. Think of it this way, all the yawing, fragmenting, and transfer of energy will be useless to the attacker if the projectile fails to tunnel through the armor's material. If the projectile has a high tendency to yaw and fragment on impact, then inevitably some of that energy will be dissipated as it works itself through the armor. It may still ultimately strike the flesh below, but at a much reduced potential energy level and hence a lower level of damage. In other words, the same factors that would justify a high Dmg modifier should also justify a negative DR modifier.\par
+\par
+Unfortunately, there is one other factor that has been overlooked, and that is the surface of the armor (i.e. the DT). The surface of the armor does not care about what projectile strikes it. Regardless of the exact caliber and type of projectile, the surface of the armor will absorb a set amount of impact energy before failing and allowing the projectile to start tunneling through the armor material below it (i.e. where DR comes into play). Armor piercing rounds work on this principle: they are generally designed to have higher mass concentration than their hollow point counterparts, which in turn leads to higher force (if we make the simplifying assumption that acceleration is constant for each shot fired), which in turn leads to higher energy potential. Therefore, armor piercing rounds tend to have an easier time breaking the surface and penetrating any body armor, though their more solid mass generally means less yawing and fragmentation, leading to a lower damage potential. This leads to the following observations/conclusions:\par
+\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 There really ought to be a "DT modifier" for ammunition in addition to the existing modifiers.\par
+{\pntext\f1\'B7\tab}The Dmg mod really should be applied after the bullet has broken the surface of the armor but before tunneling through the armor.\par
+{\pntext\f1\'B7\tab}If the DT is not able to fully absorb the anti-DT potential of the projectile, there should be negative consequences for the underlying DR. That said, DT itself should not be able to be reduced to below zero.\par
+{\pntext\f1\'B7\tab}Under no circumstances should DR fall below zero or above 100.\par
+\pard\par
+Given the above, it is obvious that only two changes need to be made: More specifically, the decision was made to effect changes in:\par
+\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 Ammo attributes -- more to the point, the relevant ammo proto files. A "DT mod" attribute will somehow need to be added, to mention nothing of the inevitable adjustments that will need to be made to the DR Mod and Dmg Mod in order to accommodate the DT mod.\par
+{\pntext\f1\'B7\tab}Damage formula calculation -- since the DT modifier is a totally new attribute, the damage calculation will need to be updated in order to make use of it. Unfortunately, damage calculation is handled entirely by the engine, and this necessitates hacking the executable to get desired results. As of version 1.1a of YAAM, users who have sfall installed on their systems can run this mod without needing to use the modified Fallout 2 executable.\par
+\pard\par
+Note especially that \b\i no changes were made to weapon attributes and armor attributes, nor are there any plans in place to do so.\b0\i0  Having said that, it must be admitted that changes to some weapons may be needed to bring about true balance. But that will be the focus of another mod.\par
+\par
+\par
+\ul\b 3. Installation\ulnone\b0\par
+\par
+\ul\i 3.1 Technical Requirements\ulnone\i0\par
+\par
+This mod requires that the original Fallout 2 game be installed, and the Official 1.02 patch be applied to it. Optionally, install sfall - \b minimum version of 2.8 is required.\b0  Sfall is not included with YAAM, and must be downloaded and installed separately.\par
+\par
+This mod has been tested with 1.02d US patch. In theory, this mod should also work with the UK patch. Users of the French and German patch should in theory be able to use this as well, though they may be forced to use the US executable.\par
+\par
+This mod has only been tested on the Windows platform - my apologies to Macintosh users. In theory, a Windows emulator should also work, but I would not bet on it.\par
+\par
+\ul\i 3.2 Files Manifest\ulnone\i0\par
+\par
+The mod contains the following files:\par
+\par
+Fallout2.exe\tab\tab\tab\tab (The modified version of the main executable that came with the Official 1.02d US Patch. Needed if sfall is not part of the installation.)\par
+YAAM_ReadMe.rtf\tab\tab\tab (This file.)\par
+YAAMStats.xls\tab\tab\tab\tab (Contains detailed damage calculations using both the new YAAM damage formula and the original damage formula, sorted by ammunition type. Intended as a comparison and contrast tool, as well as a tool for statistical analysis.)\par
+dat2.exe\tab\tab\tab\tab (Anchorite's excellent dat packer/unpacker program - used solely for mod installation purposes.)\par
+msvcr71.dll\tab\tab\tab\tab (Support file needed for dat2.exe.)\par
+zlib1.dll\tab\tab\tab\tab\tab (Support file needed for dat2.exe.)\par
+YAAM_install.bat\tab\tab\tab (Batch file used to install the YAAM ammo mod.)\par
+YAAM_uninstall.bat\tab\tab\tab (Batch file used to uninstall the YAAM ammo mod.)\par
+YAAM_Replace.vbs\tab\tab\tab (VBScript file used to supplement DOS's less than adequate Search-and-Replace functionality.)\par
+Text\\English\\Game\\PROTO.MSG\tab (Affects the display of DT mod attribute in ammunition. Only valid for English language versions of Fallout 2.)\par
+Text\\french\\game\\PROTO.MSG\tab\tab (Affects the display of DT mod attribute in ammunition. Only valid for French language versions of Fallout 2.)\par
+Text\\German\\Game\\PROTO.MSG\tab (Affects the display of DT mod attribute in ammunition. Only valid for German language versions of Fallout 2.)\par
+Proto\\Items\\00000008.pro\tab\tab (Modified proto file for Explosive Rocket.)\par
+Proto\\Items\\00000029.pro\tab\tab (Modified proto file for 10mm JHP.)\par
+Proto\\Items\\00000030.pro\tab\tab (Modified proto file for 10mm AP.)\par
+Proto\\Items\\00000031.pro\tab\tab (Modified proto file for .44 Magnum JHP.)\par
+Proto\\Items\\00000032.pro\tab\tab (Modified proto file for Flamethrower Fuel.)\par
+Proto\\Items\\00000033.pro\tab\tab (Modified proto file for 14mm AP.)\par
+Proto\\Items\\00000034.pro\tab\tab (Modified proto file for .223 FMJ.)\par
+Proto\\Items\\00000035.pro\tab\tab (Modified proto file for 5mm JHP.)\par
+Proto\\Items\\00000036.pro\tab\tab (Modified proto file for 5mm AP.)\par
+Proto\\Items\\00000037.pro\tab\tab (Modified proto file for Rocket AP.)\par
+Proto\\Items\\00000111.pro\tab\tab (Modified proto file for .44 Magnum FMJ.)\par
+Proto\\Items\\00000121.pro\tab\tab (Modified proto file for 9mm Ball.)\par
+Proto\\Items\\00000274.pro\tab\tab (Modified proto file for Robo Rocket Ammo.)\par
+Proto\\Items\\00000358.pro\tab\tab (Modified proto file for 2mm EC.)\par
+Proto\\Items\\00000359.pro\tab\tab (Modified proto file for 4.7mm Caseless.)\par
+Proto\\Items\\00000360.pro\tab\tab (Modified proto file for 9mm.)\par
+Proto\\Items\\00000361.pro\tab\tab (Modified proto file for HN Needler Cartridge.)\par
+Proto\\Items\\00000362.pro\tab\tab (Modified proto file for HN AP Needler Cartridge.)\par
+Proto\\Items\\00000363.pro\tab\tab (Modified proto file for 7.62mm.)\par
+Proto\\Items\\00000038.pro\tab\tab (Unmodified proto file for Small Energy Cell.)\par
+Proto\\Items\\00000039.pro\tab\tab (Unmodified proto file for Micro Fusion Cell.)\par
+Proto\\Items\\00000095.pro\tab\tab (Unmodified proto file for 12 ga. Shotgun Shells.)\par
+Proto\\Items\\00000163.pro\tab\tab (Unmodified proto file for BB's.)\par
+Proto\\Items\\00000357.pro\tab\tab (Unmodified proto file for .45 Caliber.)\par
+Proto\\Items\\00000382.pro\tab\tab (Unmodified proto file for Flamethrower Fuel MKII.)\par
+37 files in total\par
+\par
+\ul\i 3.3 Installation\ulnone\i0\par
+\par
+\b IMPORTANT NOTICE:\b0  If YAAM comes bundled with another mod as an installation option, please follow that mod's instructions for installation instead of any of the following instructions.\par
+\par
+Installation is easy. If you have nothing else installed with your 1.02d Fallout 2 game, and you are running the US/UK, French, or German version of the game, then this option is highly recommended. Otherwise, skip ahead to the manual installation section.\par
+\par
+a) Create an empty folder in your main Fallout 2 installation directory and extract all the files from the archive to it - make sure to extract them with the file paths options on.\par
+b) Look for a file named "YAAM_install.bat". Note that you may need administrator privileges in order for this file to run properly.\par
+c) Double-click on it.\par
+d) The mod should auto-install itself, making backups of the main Fallout2.exe file, the Patch000.dat file, PROTO.MSG, ddraw.ini, and any ammo proto files, assuming that the original files exist and that it is necessary.\par
+e) If sfall is detected, the installer will automatically update ddraw.ini with the correct settings, while preserving all other changes. Otherwise, it will copy a modified version of Fallout2.exe.\par
+f) If PATCH000.DAT is detected, the installer will add the modified ammo protos to it. Otherwise, it will copy the ammo protos under the correct directory paths, creating them as necessary. \par
+g) If PROTO.MSG is detected (most likely because another mod has made use of it), YAAM will do its best to integrate its own changes into the file while preserving the changes made by the other mod(s).\par
+h) On the same note, the installer will automatically detect which localized version of PROTO.MSG was used and act accordingly.\par
+i) If no PROTO.MSG file exists, the installer will copy over the correct localized version under the correct directory path. However, if PATCH000.DAT exists, the installer will instead attempt to add PROTO.MSG directly to it.\par
+j) The installer has 3 exit codes: 0 for successful installation, 1 for critical missing files (for example, cannot locate Fallout2.exe), 2 for configuration conflict errors (such as invalid language settings or the presence of another ammo mod).\par
+\par
+\ul\i 3.4 Manual Installation\ulnone\i0\par
+\par
+Manual installation is recommended only for advanced users, or if you have any other mods running in your Fallout 2 installation - while YAAM has not been tested against any other mods, most mods in theory should work with YAAM. Familiarity with the dat2 tool is assumed (if not, then run dat2.exe without any arguments to get help - note that it \b is\b0  case sensitive). Familiarity with Windows OS is also assumed.\par
+\par
+a) If you are not using sfall, backup your Fallout2.exe file. Copy and replace Fallout2.exe with the modified exe file that comes with the YAAM archive.\par
+b) If you are using sfall, backup your ddraw.ini file. Change the DamageFormula setting to 5 (i.e. "DamageFormula=5"). Save your changes.\par
+c) If you have the Patch000.dat file, back it up, then use Anchorite's dat2 program to add the individual ammo protos to the Patch000.dat file. You will need to remove Proto\\Item\\00000031.pro from PATCH000.DAT first before adding the ammo protos.\par
+d) If Patch000.dat does not exist, backup any existing ammo protos (see Files Manifest for a complete list), then copy the "Proto" folder from the YAAM archive to the new "data" directory. Make any newly copied files read only.\par
+e) Look for the file <Fallout2_main_install_dir>\\data\\Text\\<your_localized_language>\\Game\\PROTO.MSG.\par
+f) If it exists, back it up, then change line 511 to the locale appropriate version. Consult the localized version of PROTO.MSG that comes with the YAAM archive to see what how line 511 should read. (Basically, this changes the line from referring to Damage Resistance to referring to Damage Threshold.)\par
+g) If PROTO.MSG does not exist but Patch000.dat exists, use Anchorite's dat2 program to add the PROTO.MSG file to the Patch000.dat file, making any adjustments necessary for localization purposes.\par
+h) If both PROTO.MSG and Patch000.dat do not exist, copy over the "Text" folder from the YAAM archive, then delete any folder not appropriate to your language setting. Make the PROTO.MSG file read only.\par
+\par
+\ul\i 3.5 Uninstallation\ulnone\i0\par
+\par
+If installation was done by using the YAAM_install.bat file, it is highly recommended that uninstallation be done by double-clicking on the file YAAM_uninstall.bat. For safety reasons, any folders created by the installation process will remain, but otherwise, the mod will be completely removed, and backup files restored.\par
+\par
+If installation was done manually, simply reverse the steps used in the manual installation process to uninstall the mod. If a file was modified, restore its original value from the backup. \b WARNING: \b0 Do \b not\b0  use the YAAM_uninstall.bat file if installation was done manually!\par
+\par
+\par
+\ul\b 4. Technical Details\ulnone\b0\par
+\par
+\ul\i 4.1 New Damage Formula\ulnone\i0\par
+\par
+In Fallout 2, calculation of damage against a critter is the responsibility of one function. It is this function that has been modified. A more precise "grammar" follows:\par
+\par
+\b\i damage\b0\i0  = max[int(\i total_damage\i0 ) - int(\i modified_DR\i0  * int(\i total_damage\i0 )), 0]\par
+\par
+\i total_damage\i0  = [(\i raw_damage\i0  - max(\i modified_DT\i0 , 0)) * \i modified_mult\i0 ] / [dmg_div * 2 * 100]\par
+\par
+\i modified_DR\i0  = armor_DR + [10 * min(\i modified_DT\i0 , 0) / 100]\par
+\par
+\i modified_DT\i0  = armor_DT - ammo_DT\par
+\par
+\i modified_mult\i0  = critical_hit_bonus * dmg_mult * combat_difficulty_modifier\par
+\par
+\i raw_damage\i0  = random(damage_range_of_weapon) + 2 * (rank_of_Bonus_Ranged_Damage_perk)\par
+\par
+armor_DR = the DR attribute of the victim's armor. Reduce by 80% if a critical hit is deemed to be armor bypassing. Add 30 if player has the Finesse trait.\par
+\par
+armor_DT = the DT attribute of the victim's armor. Reduce by 80% if a critical hit is deemed to be armor bypassing, if the weapon has the Weapon Penetrate perk, or an armor piercing Unarmed attack was used.\par
+\par
+ammo_DT = the DT mod attribute of the ammunition. This number replaces what was the DR mod of ammunition attribute in the vanilla game.\par
+\par
+critical_hit_bonus = 2, 3, 4, 5, 6, or 8. A non-critical hit will always have a value of 2.\par
+\par
+combat_difficulty_modifier = 75, 100, or 125. If the player is attacking, or the combat difficulty is set at Normal, this is 100. Otherwise, it is set at 75 if combat difficulty is set at Wimpy, and 125 if combat difficulty is set at Rough.\par
+\par
+dmg_mult = the dividend of the Dmg Mod attribute of ammunition.\par
+\par
+dmg_div = the divisor of the Dmg Mod attribute of ammunition.\par
+\par
+rank_of_Bonus_Ranged_Damage_perk = 0, 1, or 2\par
+\par
+damage_range_of_weapon = damage range of the weapon as shown by its attributes in the Inventory screen. For example, the 10mm Pistol has a damage range of 5 to 12 inclusive.\par
+\par
+(Note: Certain perks, such as Living Anatomy, add their damage \b\i after\b0\i0  the above damage calculation routine is done. This is an artifact from the original damage calculation code. The merits of doing this are debatable, and perhaps a future version of YAAM will address it.)\par
+\par
+\ul\i 4.2 New Ammunition Attributes\ulnone\i0\par
+\par
+Due to the changes in the damage formula, the attributes of some of the ammunition is changed. That being said, note that not all ammunition needed to be changed. For example, Flamethrower Fuel MK II had a Dmg Mod of 1/1 and a DR Mod of 0. Under the new system, it has a Dmg Mod of 1/1 and a DT Mod of 0. Since the old DR Mod and the new DT Mod share the same absolute values, no change to the ammo proto file was necessary.\par
+\par
+The following is a list of changed ammo protos:\par
+\par
+\ul Ammunition\ulnone\tab\tab\tab\ul Dmg Mod\ulnone\tab\tab\ul DT Mod\ulnone\par
+Explosive Rocket\tab\tab 3/2\tab\tab\tab 0\par
+10mm JHP\tab\tab\tab 3/2\tab\tab\tab 0\par
+10mm AP\tab\tab\tab 1/1\tab\tab\tab 4\par
+.44 Magnum JHP\tab\tab 3/2\tab\tab\tab 0\par
+Flamethrower Fuel\tab\tab 3/4\tab\tab\tab 0\par
+14mm AP\tab\tab\tab 1/1\tab\tab\tab 8\par
+.223 FMJ\tab\tab\tab 1/1\tab\tab\tab 5\par
+5mm JHP\tab\tab\tab 3/2\tab\tab\tab 0\par
+5mm AP\tab\tab\tab 1/1\tab\tab\tab 4\par
+Rocket AP\tab\tab\tab 1/1\tab\tab\tab 20\par
+.44 Magnum FMJ\tab\tab 1/1\tab\tab\tab 5\par
+9mm Ball\tab\tab\tab 3/2\tab\tab\tab 2\par
+Robo Rocket Ammo\tab\tab 1/1\tab\tab\tab 10\par
+2mm EC\tab\tab\tab 3/2\tab\tab\tab 9\par
+4.7mm Caseless\tab\tab 3/2\tab\tab\tab 7\par
+9mm\tab\tab\tab\tab 1/1\tab\tab\tab 2\par
+HN Needler Cartridge\tab\tab 1/1\tab\tab\tab 2\par
+HN AP Needler Cartridge\tab 2/1\tab\tab\tab 5\par
+7.62mm\tab\tab\tab\tab 1/1\tab\tab\tab 2\par
+\par
+\ul\i 4.3 New Damage Figures\ulnone\i0\par
+\par
+Please see the attached MS Excel file YAAMStats.xls to compare new damage values versus the original damage values. Please see the Introduction tab for details on how to properly understand this file.\par
+\par
+\ul\i 4.4 Changes Made to the Engine\ulnone\i0\par
+\par
+Believe it or not, all changes made to the Fallout 2 files in this mod were done using a simple hex editor (Mikersoft's HEXtreme v1.0), though I made use of a few other data analysis tools before actually making the changes. The following documents what was done to the engine\par
+\par
+The engine was changed from offsets 0x00424995 to 0x00424A62 and from 0x004FE1C4 to 0x004FE1E7, if you are using a dissembler such as Ollydbg. If you are using a plain hex editor, these would be offsets 0x00014D95 to 0x00014E62 and 0x000EE534 to 0x000EE5E7. The first offset is where the damage calculation function was located in the engine, and changes were made to it. Unfortunately, the space wasn't sufficient for all that needed to be done, so an unconditional jump was made to the second offset location to do additional processing before returning to the routine. This should be safe: offsets 0x004FE1C4 and 0x004FE1E7 were nothing but zeros before the change, so it was unused space in the executable. Nonetheless, any such unconditional jumps are inherently risky, and have a nasty tendency to cause side-effects. While there was testing done to ensure things are working as they should, I cannot guarantee a crash free experience for obvious reasons. On request, a hex dump of the changes can be made available.\par
+\par
+Note that as of version 1.1a, sfall has been integrated with YAAM. This means that the executable no longer needs to be modified as all modified code resides in ddraw.dll. The code in sfall is exactly the same, with the obvious exception of no longer needing to split the assembly code between two different offsets.\par
+\par
+\par
+\ul\b 5. Acknowledgements and Credits\ulnone\b0\par
+\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 Black Isle Studios for making such a great game.\par
+{\pntext\f1\'B7\tab}Thanks to Glovz and Magnus for setting the high bar with their excellent ammo and combat mods. While I had the idea of making a combat mod before they had released theirs, it was their complete products that finally motivated me to finish my own.\par
+{\pntext\f1\'B7\tab}Special thanks to Glovz for his feedback and providing crucial information that greatly helped in the shaping of this mod.\par
+{\pntext\f1\'B7\tab}Special thanks to Timeslip for his help in integrating YAAM into sfall.\par
+{\pntext\f1\'B7\tab}Thanks to crazycc for sharing his analysis of the damage calculation routine.\par
+{\pntext\f1\'B7\tab}Thanks to Anchorite for his dat2 program. Nifty little gadget, that. :)\par
+{\pntext\f1\'B7\tab}The fine folks at No Mutants Allowed for permitting me to upload YAAM to their site.\par
+{\pntext\f1\'B7\tab}Last but most certainly not least, thanks to you for playing around with my mod. :)\par
+\pard\par
+Questions? Comments? Leave a post at the No Mutants Allowed forums, and I will get back to you as soon as possible.\par
+\par
+-- The Haen.\par
+}
+ 
